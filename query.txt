@@ -1,0 +1,46 @@
+
+-- 멤버 테이블
+create table market_member (
+
+memberid	varchar2(20)	primary key,	-- 아이디 PK
+memberpw	varchar2(100)	not null,		-- 비밀번호
+membername	varchar2(20)	not null,		-- 이름
+phone		varchar2(20)	not null,		-- 전화번호
+enabled		number(1)	default 1,			-- 계정상태
+rolename	varchar2(20)	default 'ROLE_USER' -- 계정권한
+);
+
+
+-- 게시판 테이블
+create table market_board (
+
+boardnum	number	primary key,		-- 게시판 번호 PK
+memberid	varchar2(20)	not null,	-- 작성자 아이디 FK
+title		varchar2(200)	not null,	-- 제목
+contents	varchar2(2000)	not null,	-- 내용
+inputdate	date	default sysdate,	-- 작성일
+category	varchar2(50),				-- 카테고리
+soldout		char(1)	default 'N',		-- 판매상태
+buyerid		varchar2(20)				-- 구매자 아이디 FK
+
+foreign key (memberid) references market_member(memberid),
+foreign key (buyerid) references market_member(memberid) 
+);
+
+-- 게시글 고유번호 시퀀스
+create sequence market_board_seq;
+
+-- 리플 테이블
+create table market_reply (
+replynum	number	primary key,		-- 댓글고유번호 PK
+boardnum	number ,					-- 소속 게시글 번호 FK
+memberid	varchar2(20) not null,		-- 작성자 아이디 FK
+replytext	varchar2(500),				-- 리플 내용
+inputdate	date	default sysdate,	-- 작성일
+
+foreign key (boardnum) references market_board(boardnum),
+foreign key (memberid) references market_member(memberid)
+);
+
+-- 리플 고유번호 시퀀스
+create sequence market_reply_seq;
