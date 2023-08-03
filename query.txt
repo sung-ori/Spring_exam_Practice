@@ -44,3 +44,5 @@ foreign key (memberid) references market_member(memberid)
 
 -- 리플 고유번호 시퀀스
 create sequence market_reply_seq;
+
+insert 

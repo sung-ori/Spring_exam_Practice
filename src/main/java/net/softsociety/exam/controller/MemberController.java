@@ -20,4 +20,8 @@ import net.softsociety.exam.service.MemberService;
 public class MemberController {
 	
 
+	@GetMapping("join")
+	public String joinForm() {
+		return "memberView/joinForm";
+	}
 }
