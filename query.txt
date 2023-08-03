@@ -21,7 +21,7 @@ contents	varchar2(2000)	not null,	-- 내용
 inputdate	date	default sysdate,	-- 작성일
 category	varchar2(50),				-- 카테고리
 soldout		char(1)	default 'N',		-- 판매상태
-buyerid		varchar2(20)				-- 구매자 아이디 FK
+buyerid		varchar2(20),				-- 구매자 아이디 FK
 
 foreign key (memberid) references market_member(memberid),
 foreign key (buyerid) references market_member(memberid) 
